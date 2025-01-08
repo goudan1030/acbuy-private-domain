@@ -6,8 +6,8 @@ interface FeatureProductSectionProps {
   product?: Product; // 可选属性
 }
 
-const FeatureProductSection: React.FC<FeatureProductSectionProps> = ({ product }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const FeatureProductSection: React.FC<FeatureProductSectionProps> = () => {
+  const [currentIndex] = useState(0);
   const [recommendProducts, setRecommendProducts] = useState<Product[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
