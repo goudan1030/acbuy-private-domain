@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 添加全局背景样式 */
+body {
+  background: linear-gradient(180deg, #FA0202 0%, #FF345D 64%, #FF1C37 100%);
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
+/* 确保内容区域有适当的背景 */
+.main-content {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+}
