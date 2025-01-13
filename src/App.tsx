@@ -78,32 +78,38 @@ function App() {
           element={
             <>
               <Header />
-              {/* 焦点区域 - 宽度1200px，居中 */}
-              <div className="mx-auto" style={{ maxWidth: '1200px', padding: '0 0px' }}>
-                <FeatureProductSection /> {/* 直接使用组件，不需要传递props */}
-              </div>
+              {/* 添加响应式背景色容器 */}
+              <div className="w-full lg:bg-[#FFE5C5]">
+                <div className="mx-auto" style={{ maxWidth: '1200px' }}>
+                  {/* 焦点区域 */}
+                  <div style={{ padding: '0 0px' }}>
+                    <FeatureProductSection />
+                  </div>
 
-              {/* 分类导航 */}
-              <CategoryNav 
-                categories={CATEGORIES} 
-                activeCategory={activeCategory}
-                onCategoryClick={handleCategoryClick} 
-              />
-
-              {/* 分类商品区域 - 宽度1200px，居中 */}
-              <div className="mx-auto" style={{ maxWidth: '1200px' }}>
-                {CATEGORIES.map((category) => (
-                  <ProductSection
-                    key={category}
-                    category={category}
-                    products={products.filter((product) => product.category === category)}
-                    visibleProducts={visibleProducts[category]}
-                    loadMoreProducts={() => loadMoreProducts(category)}
+                  {/* 分类导航 */}
+                  <CategoryNav 
+                    categories={CATEGORIES} 
+                    activeCategory={activeCategory}
+                    onCategoryClick={handleCategoryClick} 
                   />
-                ))}
-              </div>
 
-              <div className="py-8"></div>
+                  {/* 分类商品区域 */}
+                  <div>
+                    {CATEGORIES.map((category) => (
+                      <ProductSection
+                        key={category}
+                        category={category}
+                        products={products.filter((product) => product.category === category)}
+                        visibleProducts={visibleProducts[category]}
+                        loadMoreProducts={() => loadMoreProducts(category)}
+                      />
+                    ))}
+                  </div>
+
+                  {/* 底部间距 */}
+                  <div className="pb-32"></div>
+                </div>
+              </div>
             </>
           }
         />

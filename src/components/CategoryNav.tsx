@@ -29,50 +29,54 @@ const CategoryNav: React.FC<CategoryNavProps> = ({
   return (
     <div 
       id="category-nav"
-      className="w-full"
+      className="w-full px-2"
       style={{ marginTop: '1rem' }}
     >
       <div className={`
-        w-full bg-white shadow-md
-        ${isSticky ? 'fixed top-0 left-0 right-0' : ''}
+        w-full bg-white shadow-md rounded-lg
+        ${isSticky ? 'fixed top-0 left-0 right-0 z-50 rounded-none' : ''}
       `}>
-        <div className="w-full flex justify-center">
-          <div 
-            className="mx-auto"
+        <div className="max-w-[1200px] mx-auto">
+          <nav 
+            className="flex justify-between overflow-x-auto whitespace-nowrap"
             style={{ 
-              width: '1200px',
-              maxWidth: '1200px'
+              padding: '0 16px',
             }}
           >
-            <nav className={`
-              flex justify-between px-4 py-4 overflow-x-auto whitespace-nowrap
-              ${isSticky ? 'w-full max-w-screen-2xl' : ''}
-            `}>
-              {categories.map((category) => (
-                <a
-                  key={category}
-                  href={`#${category}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onCategoryClick(category);
-                  }}
-                  className={`flex items-center uppercase text-red-600 hover:underline min-w-fit ${
-                    activeCategory === category ? 'underline font-bold' : ''
-                  }`}
-                >
-                  {activeCategory === category && (
-                    <img 
-                      src="/location.svg" 
-                      alt="Location" 
-                      className="mr-2" 
-                      style={{ width: '16px', height: '16px' }} 
-                    />
-                  )}
-                  {category}
-                </a>
-              ))}
-            </nav>
-          </div>
+            {categories.map((category) => (
+              <a
+                key={category}
+                href={`#${category}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onCategoryClick(category);
+                  const element = document.getElementById(category);
+                  if (element) {
+                    const offset = isSticky ? 60 : 0;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
+                className={`flex items-center uppercase text-red-600 hover:underline min-w-fit py-4 ${
+                  activeCategory === category ? 'underline font-bold' : ''
+                }`}
+              >
+                {activeCategory === category && (
+                  <img 
+                    src="/location.svg" 
+                    alt="Location" 
+                    className="mr-2" 
+                    style={{ width: '16px', height: '16px' }} 
+                  />
+                )}
+                {category}
+              </a>
+            ))}
+          </nav>
         </div>
       </div>
     </div>

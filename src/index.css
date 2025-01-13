@@ -2,11 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 添加全局背景样式 */
-body {
-  background: linear-gradient(180deg, #FA0202 0%, #FF345D 64%, #FF1C37 100%);
-  min-height: 100vh;
-  background-attachment: fixed;
+/* 修改背景样式，只在小屏幕下显示渐变背景 */
+@media (max-width: 1024px) {
+  body {
+    background: linear-gradient(180deg, #FA0202 0%, #FF345D 64%, #FF1C37 100%);
+    min-height: 100vh;
+    background-attachment: fixed;
+  }
+}
+
+/* 大屏幕下不设置背景色，由内容区域控制 */
+@media (min-width: 1024px) {
+  body {
+    background: none;
+  }
 }
 
 /* 确保内容区域有适当的背景 */
