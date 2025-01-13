@@ -3,7 +3,7 @@ import { Product } from '../types/Product';
 import { apiService } from '../services/apiService';
 
 interface FeatureProductSectionProps {
-  product?: Product; // 可选属性
+  product?: Product;
 }
 
 const FeatureProductSection: React.FC<FeatureProductSectionProps> = () => {
@@ -18,27 +18,25 @@ const FeatureProductSection: React.FC<FeatureProductSectionProps> = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const observer = useRef<IntersectionObserver>();
 
-  // 获取推荐商品
-  const fetchRecommendProducts = useCallback(async (pageNumber: number) => {
+  const fetchRecommendProducts = useCallback(async () => {
     try {
       setIsLoading(true);
-      const data = await apiService.getRecommendProducts(pageNumber);
+      const data = await apiService.getRecommendProducts();
       if (data && data.length > 0) {
         setRecommendProducts(prev => [...prev, ...data]);
-        setHasMore(data.length >= 10); // 假设每页10条数据
+        setHasMore(data.length >= 10);
       } else {
         setHasMore(false);
       }
     } catch (error) {
-      console.error('获取推荐商品失败:', error);
+      console.error('Error fetching recommended products:', error);
     } finally {
       setIsLoading(false);
     }
   }, []);
 
-  // 初始加载
   useEffect(() => {
-    fetchRecommendProducts(1);
+    fetchRecommendProducts();
   }, [fetchRecommendProducts]);
 
   // 滚动加载
@@ -113,7 +111,7 @@ const FeatureProductSection: React.FC<FeatureProductSectionProps> = () => {
           </h2>
         </div>
         <div className="pt-8 flex items-center justify-center" style={{ height: '220px' }}>
-          <p className="text-gray-500">暂无推荐商品</p>
+          <p className="text-gray-500">No recommended products</p>
         </div>
       </section>
     );
@@ -210,9 +208,22 @@ const FeatureProductSection: React.FC<FeatureProductSectionProps> = () => {
           transition: isDragging ? 'none' : 'transform 0.3s ease',
         }}
       >
-        <div className="w-2/5 flex-shrink-0 overflow-hidden rounded-lg" style={{ height: '220px' }}>
-          <img src={currentProduct.image_url} alt={currentProduct.name} className="w-full h-full object-cover" />
+        {/* Image container */}
+        <div className="w-2/5 flex-shrink-0">
+          <div style={{ width: '100%', paddingTop: '100%', position: 'relative' }}>
+            <div className="absolute top-0 left-0 w-full h-full p-2">
+              <div className="w-full h-full rounded-lg overflow-hidden">
+                <img 
+                  src={currentProduct.image_url || '/placeholder-image.jpg'} 
+                  alt={currentProduct.name} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* Content container */}
         <div className="pl-4 w-3/5 overflow-hidden flex flex-col justify-between">
           <div>
             <h3 className="font-bold text-gray-800 text-lg" style={{

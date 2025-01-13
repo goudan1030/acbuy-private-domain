@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage';
 import ProductsPage from './pages/admin/ProductsPage';
 import FeaturedProductList from './pages/admin/FeaturedProductList';
 import FeaturedProductForm from './pages/admin/FeaturedProductForm';
+import CategoryNav from './components/CategoryNav';
 
 // 分类列表（过滤掉Recommended分类）
 const CATEGORIES = ['JACKETS', 'T-shirt', 'PEARLS', 'SHOES', 'PANTS'];
@@ -83,25 +84,11 @@ function App() {
               </div>
 
               {/* 分类导航 */}
-              <div className="w-full bg-white shadow-md sticky top-0 z-10">
-                <div className="mx-auto" style={{ maxWidth: '1200px', width: '100%' }}> {/* 添加 maxWidth 和 width */}
-                  <nav className="flex justify-center gap-4 px-4 py-4 overflow-x-auto whitespace-nowrap">
-                    {CATEGORIES.map((category) => (
-                      <a
-                        key={category}
-                        href={`#${category}`}
-                        className={`flex items-center uppercase text-red-600 hover:underline ${activeCategory === category ? 'underline font-bold' : ''}`}
-                        onClick={() => handleCategoryClick(category)}
-                      >
-                        {activeCategory === category && (
-                          <img src="/location.svg" alt="Location Icon" className="mr-2" style={{ width: '16px', height: '16px' }} />
-                        )}
-                        {category}
-                      </a>
-                    ))}
-                  </nav>
-                </div>
-              </div>
+              <CategoryNav 
+                categories={CATEGORIES} 
+                activeCategory={activeCategory}
+                onCategoryClick={handleCategoryClick} 
+              />
 
               {/* 分类商品区域 - 宽度1200px，居中 */}
               <div className="mx-auto" style={{ maxWidth: '1200px' }}>

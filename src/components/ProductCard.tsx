@@ -1,39 +1,57 @@
 import React from 'react';
-import { Product } from './types';
+import { Product } from '../types/Product';
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  // 确保image_url存在且为有效URL
-  const imageUrl = product.image_url || 'https://via.placeholder.com/150'; // 默认图片
-  // 确保current_price存在且为有效数值
-  const currentPrice = product.current_price ? parseFloat(product.current_price) : 0;
-  // 确保original_price存在且为有效数值
-  const originalPrice = product.original_price ? parseFloat(product.original_price) : 0;
+  const imageUrl = product.image_url || 'https://via.placeholder.com/150';
+  const currentPrice = product.current_price ? parseFloat(String(product.current_price)) : 0;
+  const originalPrice = product.original_price ? parseFloat(String(product.original_price)) : currentPrice;
 
   const hasDiscount = originalPrice > currentPrice;
   const discountPercentage = hasDiscount
     ? ((originalPrice - currentPrice) / originalPrice) * 100
     : 0;
 
+  const handleBuyClick = () => {
+    if (product.purchase_link) {
+      window.open(product.purchase_link, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  const handleInquiryClick = () => {
+    if (product.inquiry_link) {
+      window.open(product.inquiry_link, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div className="rounded-lg overflow-hidden flex flex-col h-full">
-      {/* 使用默认图片如果image_url无效 */}
-      <img src={imageUrl} alt={product.name} className="w-full h-48 object-cover" />
-      <h3 className="font-semibold text-gray-800"
-       style={{
-        display: '-webkit-box',
-        WebkitLineClamp: 2,
-        WebkitBoxOrient: 'vertical',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        lineHeight: '1.5',
-        maxHeight: '3em',
-      }}
+      <div className="relative w-full" style={{ paddingTop: '100%' }}>
+        <div className="absolute inset-0">
+          <img 
+            src={imageUrl} 
+            alt={product.name} 
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+      <h3 className="font-semibold text-gray-800 mt-2"
+        style={{
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          lineHeight: '1.5',
+          maxHeight: '3em',
+        }}
       >
-      {product.name}</h3>
+        {product.name}
+      </h3>
 
       <div className="mt-2 flex items-center justify-between">
         <div>
@@ -49,7 +67,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {hasDiscount && (
           <span
             className="bg-red-100 text-red-800 text-xs font-semibold rounded"
-            style={{ padding: '2px 5px', fontSize: '10px' }} // 缩小标签大小及边距
+            style={{ padding: '2px 5px', fontSize: '10px' }}
           >
             {discountPercentage.toFixed(0)}% OFF
           </span>
@@ -57,10 +75,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-2">
-        <button className="bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition">
+        <button 
+          onClick={handleBuyClick}
+          className="bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition"
+        >
           BUY NOW
         </button>
-        <button className="bg-gray-100 text-gray-800 py-2 rounded-md hover:bg-gray-200 transition">
+        <button 
+          onClick={handleInquiryClick}
+          className="bg-gray-100 text-gray-800 py-2 rounded-md hover:bg-gray-200 transition"
+        >
           INQUIRY
         </button>
       </div>
