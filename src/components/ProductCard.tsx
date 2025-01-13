@@ -1,12 +1,13 @@
 import React from 'react';
 import { Product } from '../types/Product';
+import { getProductImageUrl } from '../services/imageService';
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const imageUrl = product.image_url || 'https://via.placeholder.com/150';
+  const imageUrl = getProductImageUrl(product) || 'https://via.placeholder.com/150';
   const currentPrice = product.current_price ? parseFloat(String(product.current_price)) : 0;
   const originalPrice = product.original_price ? parseFloat(String(product.original_price)) : currentPrice;
 

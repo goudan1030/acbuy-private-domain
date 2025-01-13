@@ -5,20 +5,25 @@ interface NavigationBarProps {
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ isDownloadVisible }) => {
+  const getJoinLink = () => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    return isMobile ? 'https://m.acbuy.com/login' : 'https://www.acbuy.com/login';
+  };
+
   return (
     <div
-      className="w-full" // 背景宽度保持100%
+      className="w-full"
       style={{
         background: '#FF0000',
         boxShadow: '0px 5px 15px 0px rgba(255, 0, 0, 0.35), inset 0px -4px 10px 0px rgba(255, 255, 255, 0.6), inset 0px 4px 10px 0px rgba(255, 255, 255, 0.6)',
       }}
     >
       <div
-        className="flex justify-between items-center mx-auto" // 内容区域居中
+        className="flex justify-between items-center mx-auto"
         style={{
           height: '50px',
-          maxWidth: '1200px', // 内容区域宽度限制为1200px
-          padding: '0 16px', // 添加左右内边距
+          maxWidth: '1200px',
+          padding: '0 16px',
         }}
       >
         {/* Logo */}
@@ -27,7 +32,17 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isDownloadVisible }) => {
         </a>
 
         {/* Join Button */}
-        <a href="/join" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-700">
+        <a 
+          href={getJoinLink()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-black text-white rounded hover:bg-gray-700"
+          style={{
+            height: '32px',
+            lineHeight: '32px',
+            padding: '0 16px',
+          }}
+        >
           Join
         </a>
       </div>

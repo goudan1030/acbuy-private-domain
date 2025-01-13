@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Product } from '../types/Product';
 import { apiService } from '../services/apiService';
+import { getProductImageUrl } from '../services/imageService';
 
 interface FeatureProductSectionProps {
   product?: Product;
@@ -196,9 +197,9 @@ const FeatureProductSection: React.FC<FeatureProductSectionProps> = () => {
         </h2>
       </div>
 
-      {/* 焦点产品内容展示 */}
+      {/* 内容区域 */}
       <div
-        className="pt-8 flex justify-center items-center"
+        className="pt-8 flex justify-center items-stretch"
         ref={containerRef}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -206,15 +207,16 @@ const FeatureProductSection: React.FC<FeatureProductSectionProps> = () => {
         style={{
           transform: `translateX(${translateX}px)`,
           transition: isDragging ? 'none' : 'transform 0.3s ease',
+          minHeight: '280px',
         }}
       >
-        {/* Image container */}
+        {/* 图片容器 */}
         <div className="w-2/5 flex-shrink-0">
           <div style={{ width: '100%', paddingTop: '100%', position: 'relative' }}>
             <div className="absolute top-0 left-0 w-full h-full p-2">
               <div className="w-full h-full rounded-lg overflow-hidden">
                 <img 
-                  src={currentProduct.image_url || '/placeholder-image.jpg'} 
+                  src={getProductImageUrl(currentProduct) || '/placeholder-image.jpg'} 
                   alt={currentProduct.name} 
                   className="w-full h-full object-cover"
                 />
@@ -223,8 +225,9 @@ const FeatureProductSection: React.FC<FeatureProductSectionProps> = () => {
           </div>
         </div>
 
-        {/* Content container */}
-        <div className="pl-4 w-3/5 overflow-hidden flex flex-col justify-between">
+        {/* 内容容器 */}
+        <div className="pl-4 w-3/5 flex flex-col justify-between">
+          {/* 上部分内容 */}
           <div>
             <h3 className="font-bold text-gray-800 text-lg" style={{
               fontSize: '18px',
@@ -266,7 +269,9 @@ const FeatureProductSection: React.FC<FeatureProductSectionProps> = () => {
               </div>
             )}
           </div>
-          <div className="mt-4 grid grid-cols-2 gap-2">
+
+          {/* 底部按钮 */}
+          <div className="grid grid-cols-2 gap-2">
             <a
               href={currentProduct.purchase_link}
               target="_blank"
