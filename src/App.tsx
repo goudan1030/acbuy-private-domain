@@ -20,15 +20,16 @@ function App() {
           element={
             <>
               <Header />
-              <div className="w-full lg:bg-[#FFE5C5]">
+              <div className="w-full lg:bg-[#FFE5C5] lg:bg-join-acbuy-desktop">
                 <div className="mx-auto" style={{ maxWidth: '1200px' }}>
-                  <JoinAcbuy />
-                  <NoPriceDifference />
-                  <QualityControl />
-                  <GlobalTransportation />
-                  <JoinDiscord />
-                  {/* 底部间距 */}
-                  <div className="pb-32"></div>
+                  <div className="relative overflow-hidden lg:pt-[200px]">
+                    <JoinAcbuy />
+                    <NoPriceDifference />
+                    <QualityControl />
+                    <GlobalTransportation />
+                    <JoinDiscord />
+                    <div className="pb-32"></div>
+                  </div>
                 </div>
               </div>
             </>

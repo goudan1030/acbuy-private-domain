@@ -6,28 +6,32 @@ const JoinDiscord: React.FC = () => {
       <div 
         className="relative"
         style={{
-          margin: '0 calc(-50vw + 50%)',
-          width: '100vw',
+          margin: '0 auto',
+          maxWidth: '1200px',
+          width: '100%',
         }}
       >
         <div 
-          className="w-full"
-          style={{ paddingTop: 'calc(136 / 375 * 100%)' }}
+          className="w-full h-[180px] lg:h-[220px]"
+          style={{ 
+            position: 'relative'
+          }}
         >
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 bg-discord"
             style={{
-              backgroundImage: 'url(/join-discord-bg.svg)',
-              backgroundSize: 'cover',
+              backgroundSize: 'contain',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
+              width: '100%',
+              height: '100%',
             }}
           />
           <h2 
-            className="text-white text-[14px] font-bold uppercase absolute left-0 right-0 z-20 flex items-center px-4"
+            className="text-white text-[14px] lg:text-[20px] font-bold uppercase absolute left-0 right-0 z-20 flex items-center px-4"
             style={{
               fontFamily: 'Montserrat',
-              top: '10px',
+              top: '20%',
             }}
           >
             Join to Discord
@@ -36,7 +40,7 @@ const JoinDiscord: React.FC = () => {
       </div>
 
       <div 
-        className="relative -mt-[110px] mx-2"
+        className="relative gradient-content mx-2"
         style={{
           borderRadius: '10px',
           background: 'linear-gradient(180deg, #FFCADF 0%, #FFE2EB 36%, rgba(255, 255, 255, 0.9) 97%)',
