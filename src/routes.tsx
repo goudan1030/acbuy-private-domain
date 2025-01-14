@@ -1,11 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import FeaturedProductList from './pages/admin/FeaturedProductList';
-import FeaturedProductEdit from './pages/admin/FeaturedProductEdit';
-import FeaturedProductForm from './pages/admin/FeaturedProductForm';
-import TestPage from './pages/test/TestPage'; // 导入测试页面
-import AdminLayout from './layouts/AdminLayout';
 import ErrorPage from './pages/ErrorPage';
+import AdminLayout from './layouts/AdminLayout';
 
 const router = createBrowserRouter([
   {
@@ -13,22 +9,7 @@ const router = createBrowserRouter([
     element: <AdminLayout />,
     errorElement: <ErrorPage />,
     children: [
-      {
-        path: 'admin/featured-products',
-        element: <FeaturedProductList />,
-      },
-      {
-        path: 'admin/featured-products/new',
-        element: <FeaturedProductForm />,
-      },
-      {
-        path: 'admin/featured-products/edit/:id',
-        element: <FeaturedProductEdit />,
-      },
-      {
-        path: 'test', // 测试页面路由
-        element: <TestPage />,
-      },
+      // 移除了焦点商品相关路由
     ],
   },
 ]);

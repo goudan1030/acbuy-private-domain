@@ -31,20 +31,32 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isDownloadVisible }) => {
           <img src="/svg-menu.svg" alt="Logo" className="h-10" />
         </a>
 
-        {/* Join Button */}
-        <a 
-          href={getJoinLink()}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-black text-white rounded hover:bg-gray-700"
-          style={{
-            height: '32px',
-            lineHeight: '32px',
-            padding: '0 16px',
-          }}
-        >
-          Join
-        </a>
+        {/* 按钮组 */}
+        <div className="flex items-center gap-6">
+          {/* Login 按钮 */}
+          <a 
+            href="/login"
+            className="text-white hover:text-gray-200 transition-colors"
+            style={{ fontSize: '16px' }}
+          >
+            Login
+          </a>
+
+          {/* Join 按钮 */}
+          <a 
+            href={getJoinLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-black text-white rounded hover:bg-gray-700"
+            style={{
+              height: '32px',
+              lineHeight: '32px',
+              padding: '0 16px',
+            }}
+          >
+            Join
+          </a>
+        </div>
       </div>
     </div>
   );
