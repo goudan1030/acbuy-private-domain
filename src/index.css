@@ -25,3 +25,81 @@
   margin: 1rem;
   padding: 1rem;
 }
+
+/* 添加这些样式 */
+@media (min-width: 1024px) {
+  .gradient-content {
+    margin-top: -140px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .gradient-content {
+    margin-top: -120px;
+  }
+}
+
+/* 添加新的样式 */
+.bg-no-price {
+  background-image: url('/no-price-difference-bg-mobile.svg') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+.bg-quality {
+  background-image: url('/quality-control-bg-mobile.svg') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+.bg-transport {
+  background-image: url('/global-transportation-bg-mobile.svg') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+.bg-discord {
+  background-image: url('/join-discord-bg-mobile.svg') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+@media (min-width: 1024px) {
+  .bg-no-price {
+    background-image: url('/no-price-difference-bg-desktop.svg') !important;
+  }
+
+  .bg-quality {
+    background-image: url('/quality-control-bg-desktop.svg') !important;
+  }
+
+  .bg-transport {
+    background-image: url('/global-transportation-bg-desktop.svg') !important;
+  }
+
+  .bg-discord {
+    background-image: url('/join-discord-bg-desktop.svg') !important;
+  }
+}
+
+/* 添加移动端背景样式 */
+.bg-join-acbuy-mobile {
+  background-image: url('/join-acbuy-bg.webp') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: repeat-y !important;
+}
+
+/* 修改网站整体背景样式 */
+.lg\:bg-join-acbuy-desktop {
+  @media (min-width: 1024px) {
+    background-image: url('/join-acbuy-bg-desktop.webp') !important;
+    background-size: 100% auto !important;
+    background-position: top -300px center !important;
+    background-repeat: no-repeat !important;
+  }
+}

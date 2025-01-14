@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NavigationBar from './NavigationBar';
 import { getAppDownloadUrl } from '../services/appDownloadService';
+import { handleAcbuyNavigation } from '../utils/navigation';
 
 const Header: React.FC = () => {
   const [isDownloadVisible, setIsDownloadVisible] = useState(true);
@@ -21,14 +22,11 @@ const Header: React.FC = () => {
   };
 
   const handleGetClick = () => {
-    console.log('Current download URL:', downloadUrl);
-    console.log('Current user agent:', navigator.userAgent);
-    
-    if (downloadUrl) {
-      window.open(downloadUrl, '_blank', 'noopener,noreferrer');
-    } else {
-      console.log('No download URL available');
-    }
+    handleAcbuyNavigation('/login?loginStatus=register');
+  };
+
+  const handleLoginClick = () => {
+    handleAcbuyNavigation('/login');
   };
 
   return (
@@ -65,10 +63,10 @@ const Header: React.FC = () => {
                 GET
               </button>
               <button
-                onClick={handleDownloadClose}
+                onClick={handleLoginClick}
                 className="text-black font-bold border border-black px-4 py-2 rounded hidden md:block"
               >
-                CLOSE
+                LOGIN
               </button>
             </div>
           </div>

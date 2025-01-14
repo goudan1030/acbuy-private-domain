@@ -1,17 +1,22 @@
 import React from 'react';
+import { handleAcbuyNavigation } from '../utils/navigation';
 
 const JoinAcbuy: React.FC = () => {
+  const handleJoinClick = () => {
+    handleAcbuyNavigation('/login?loginStatus=register');
+  };
+
   return (
     <div 
-      className="relative w-full flex items-center justify-center px-2"
+      className="relative w-full flex items-center justify-center px-2 bg-join-acbuy-mobile lg:bg-none"
       style={{
-        backgroundImage: 'url(/join-acbuy-bg.webp)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        imageRendering: 'auto',
+        maxWidth: '1200px',
+        margin: '0 auto',
       }}
     >
       <div 
-        className="w-full max-w-[800px] mx-auto p-8 rounded-xl mt-48"
+        className="w-full max-w-[800px] lg:max-w-[1200px] mx-auto py-8 px-4 rounded-xl mt-48 relative z-10"
         style={{
           background: 'linear-gradient(180deg, rgba(255, 230, 192, 0.8) 0%, #FFF5ED 100%)',
           backdropFilter: 'blur(10px)',
@@ -21,27 +26,20 @@ const JoinAcbuy: React.FC = () => {
         <h2
           className="mb-6 text-center"
           style={{
-            opacity: 1,
             fontFamily: 'Montserrat',
-            fontSize: '28px',
+            fontSize: '36px',
             fontWeight: 900,
             lineHeight: '78.5%',
             textTransform: 'uppercase',
             letterSpacing: '-0.05em',
-            fontVariationSettings: '"opsz" auto',
-            fontFeatureSettings: '"kern" on',
-            background: 'linear-gradient(180deg, #FEFEFC 0%, #FBD9B0 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            textFillColor: 'transparent',
-            boxShadow: '0px 27px 19px 0px rgba(238, 68, 34, 0.01)',
+            color: '#FF7018',
           }}
         >
           USE ACBUY TO SHOP<br />
           IN CHINA AT 10% OFF
         </h2>
         <button
+          onClick={handleJoinClick}
           className="block w-full px-8 py-3 transition-colors"
           style={{
             opacity: 1,
